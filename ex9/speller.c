@@ -227,7 +227,7 @@ int main (int argc, char *argv[])
       printf ("%d: %s\n", line_count, word);
   }
 
-  printf ("Usage statistics:\n");
+  printf ("\nUsage statistics:\n");
   print_stats (table);
 
   return 0;
