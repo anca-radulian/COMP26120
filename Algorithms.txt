@@ -1,0 +1,67 @@
+A. First algorithm:
+
+find_fixed_point (array)
+{
+	found:= false
+	for each i in the array
+		if( A[i] == i)
+			found:= true
+			break
+		end if
+	end for
+	if (found)
+		output: i
+	else
+		output: "No"
+}
+
+Complexity: the dominant operation is the comparison A[i] == i. It compares every element in the array with its index to check if they are equal. Hence if the array has n elements, the worst case is when the element we are looking for is actully the last one, so the complexity is O(n).
+
+Correctness: to find the element which is equal to its index, we have to search every element from the array.When we find a match, we break the for loop, keeping the index we have found and changing the boolean to true. Then we check if we have found or not the index, based on the boolean.
+
+Second algorithm (using binary search):
+
+left:= 0
+right:= lenght of A - 1
+find_fixed_point (array, left, right)
+{
+	if(right < left)
+		output: "No"
+	mid:= (left + right) / 2
+	if( mid < A[mid])
+		output: find_fixed_point (array, left, mid -1)
+	else if (mid > A[mid])
+		output: find_fixed_point (array, mid + 1, right)
+	else
+		output: mid
+}
+
+Complexity: we start by searching at the middle element in the array and if it isn't the one we are looking for then we cut again the array in half, looking whether on the left or on the right. We keep doing that until we find the required index or until the right index is bigger then the left one. So we are dividing by two with each check we make, the complexity being O(log n)
+
+Correctness: as explained above we have to make a decision based on the comparison between the index and the value at that index. If the index is smaller than the value, we have to look left because otherwise we look right. If we cannot find anything, the output wil be no.
+
+
+
+
+20
+    1    39    37
+    2    48     7
+    3     3    43
+    4     3    24
+    5    49     9
+    6    12    13
+    7     3    30
+    8    21    31
+    9     2     8
+   10    18    49
+   11    40    49
+   12    38    46
+   13    32    45
+   14    47    15
+   15    12    28
+   16    11    36
+   17    21    16
+   18    33    37
+   19    16    34
+   20    39    41
+296

@@ -1,0 +1,80 @@
+\documentclass{article}
+
+\title{COMP26120 Lab 12: Background}
+\author{Anca Radulian}
+
+\begin{document}
+\maketitle
+
+% PART 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The small-world hypothesis}
+\label{sec:small world}
+% Here give your statement of the small-world hypothesis and how you
+% are going to test it.
+
+The small world hypothesis states that between any pair of nodes(persons) there
+is a short path of around 6 six nodes(sequence of acquaintances).
+
+To test the hypothesis, calculate the distances between all the nodes to check
+how many of them are less than 6. Then compute a percentage to verify how close
+is the graph to posses the small world hypothesis.
+
+\section{Complexity Arguments}
+\label{sec:complexity}
+% Write down the complexity of Dijkstra's algorithm and of Floyd's algorithm.
+% Explain why, for these graphs, Dijkstra's algorithm is more efficient.
+
+Dijkstra's algorithm calculates the shorthest path between a source node and all
+the other nodes, whereas Floyd's algorithm calculates all the shortest paths
+between all the nodes.
+
+Complexities(E = edges, N = nodes):
+    O(E logN) - Dijkstra
+    O(N^3)    - Floyd
+
+Is better to use Dijkstra' algorithm for these kind of graphs due to its
+complexity and because we do not have edges with negative weights. Also Dijkstra
+works better on adjacency lists.
+
+\section{Part 1 results}
+\label{sec:part1}
+% Give the results of part one experiments.
+
+For the Caltech file is it possible to run the Dijkstra algorithm for all the
+nodes since there are only 769 nodes. We can observe that there are just a few
+nodes that do not have paths with less than 6 nodes.
+
+For the Oklahoma file since there are so many nodes it takes too long to run the
+algorithm for all the nodes. I have chosen to run the algorithm with the first
+node as a source. The results obtained suggest that there are 5 nodes that cannot
+be reached from node 1 in less than 6 steps.
+If we run the algorithm starting with isolated nodes such as 9619, the percentage
+will be much smaller due to lack of relations with other nodes.
+
+% PART 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Part 2 complexity analysis}
+\label{sec:complexity2}
+% Give the complexity of the heuristic route finder.
+
+The complexities of the heuristic route finder are:
+  - from one node to another is O(N)
+  - from one node to all the other nodes is O(N^2)
+  - for all paths for all the nodes is O(N^3)
+
+\section{Part 2 results}
+\label{sec:part2}
+% Give the results of part two experiments.
+
+The result for running the heuristic path finder(based on out degree) to find
+all the paths for all the nodes is considerable smaller than the one obtained
+using Dijkstra.
+
+For the Caltech file is around 68\% which means that is not an efficient way to
+search for all the paths.
+
+For the Oklahoma file, the method is called having as source the node 1 and it
+calculates all the paths from this node. The result is around 34\%.
+
+\end{document}
