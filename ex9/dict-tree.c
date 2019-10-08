@@ -72,7 +72,7 @@ tree_ptr rotate_left(tree_ptr tree_node)
   tree_node->right = rotate_node;
 
 
-  // Modify heights
+  // Modify heights for both nodes
   if(height_node(new_root->left) > height_node(new_root->right))
     new_root->height = height_node(new_root->left)+1;
   else
@@ -96,7 +96,7 @@ tree_ptr rotate_right(tree_ptr tree_node)
   new_root->right = tree_node;
   tree_node->left = rotate_node;
 
-  // Modify heights
+  // Modify heights for both nodes
   if(height_node(new_root->left) > height_node(new_root->right))
     new_root->height = height_node(new_root->left)+1;
   else
@@ -152,6 +152,7 @@ tree_ptr avl_balence_tree(Key_Type key, tree_ptr tree_node)
 }
 
 //------------------------------- Insertion ------------------------------------
+
 tree_ptr insert_node(Key_Type key, tree_ptr tree_node)
 {
   if(tree_node == NULL)
@@ -161,26 +162,22 @@ tree_ptr insert_node(Key_Type key, tree_ptr tree_node)
     no_compares = 0;
   }
   else if(strcmp(key, tree_node->element) < 0)
-    {
+  {
       no_compares++;
       tree_node->left = insert_node(key, tree_node->left);
-    }
+  }
   else if(strcmp(key, tree_node->element) > 0)
   {
     no_compares++;
     tree_node->right =insert_node(key, tree_node->right);
   }
   else
-  {
     duplicate = TRUE;
-  }
 
   if(mode == 2)
-  {
     return avl_balence_tree(key, tree_node);
-  }
 
-    return tree_node;
+  return tree_node;
 }
 
 
@@ -188,23 +185,21 @@ Table insert(Key_Type key,Table table)
 {
   // If it is the first element, i.e the root
   if(table->head == NULL)
-  {
     table->head = initialize_node(key);
-  }
   else
-      table->head=insert_node(key, table->head);
+    table->head=insert_node(key, table->head);
 
   // Calculate the number of nodes
   if(!duplicate)
-  {
     table->no_nodes++;
-  }
   else
     duplicate = FALSE;
+
   return table;
 }
 
 //------------------------------- Find -----------------------------------------
+
 Boolean find_node(Key_Type key, tree_ptr tree_node)
 {
   if(tree_node== NULL)
@@ -249,28 +244,29 @@ Boolean find(Key_Type key, Table table)
 
 void print_node(tree_ptr tree_node)
 {
-    if(tree_node->left!= NULL)
-      print_node(tree_node->left);
-    printf("Node value: %s.\n", tree_node->element);
-    if(tree_node->left!= NULL)
-      printf("Left value: %s\n", tree_node->left->element);
-    else
-      printf("Left value: NULL\n");
-    if(tree_node->right!= NULL)
-      printf("Right value: %s\n\n", tree_node->right->element);
-    else
-      printf("Right value: NULL\n\n" );
+  if(tree_node->left!= NULL)
+    print_node(tree_node->left);
 
-    if (tree_node->right!=NULL) {
-      print_node(tree_node->right);
-    }
+  printf("Node value: %s.\n", tree_node->element);
+  if(tree_node->left!= NULL)
+    printf("Left value: %s\n", tree_node->left->element);
+  else
+    printf("Left value: NULL\n");
+  if(tree_node->right!= NULL)
+    printf("Right value: %s\n\n", tree_node->right->element);
+  else
+    printf("Right value: NULL\n\n" );
+
+  if (tree_node->right!=NULL)
+    print_node(tree_node->right);
+
 }
 void print_table(Table table)
 {
-    print_node(table->head);
+  print_node(table->head);
 }
 
-
+// Calculate the height of a node
 int height_node(tree_ptr tree_node)
 {
   if(tree_node == NULL)
@@ -295,4 +291,3 @@ void print_stats (Table table)
   printf("Average number of compares for find: %.2f\n\n", table->average_comapares_find);
 
 }
-//------------------------------- End ------------------------------------------

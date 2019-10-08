@@ -1,0 +1,58 @@
+	How to write, compile, debug and run C programs on Linux
+	========================================================
+
+There are some prompts below, but you should add anything else you think
+will be useful.
+
+Useful sources of information
+=============================
+man - linux lab manual
+google
+site: cprogrammming.com
+
+Writing C programs
+==================
+-the steps to write a program in C are the same as in most other languages. You write the code, compile the program and then run it and check the output. 
+-printf function produces output based on the specified string format.
+
+Compiling C programs
+====================
+- GCC does preprocessing, compilation, assembly, and linking
+- the -o param specifies the output file
+- the -std=c99 param determines the language standard. The compiler cans accept several base standards
+- the -Wall param turns on all the most commonly used compiler warnings
+-  the -g param produces minimal debug information
+- make uses gcc to create a binary file which can be run directlty without the use of an interpreter
+
+Linking C programs
+==================
+- refeers to the creation of a single executable file from multiple object files
+- compilation and linging steps are seperate beacuse is easier to implement
+- ld is the last step in compiling a program. It combines a number of objects and archive files, relocates their data and ties up symbol references.
+
+
+Running C programs
+==================
+- after compiling the program using gcc -o, an executable file will be created.
+- the the executable file can be run like this: ./filename
+
+
+Comparing output from C and Java programs
+=========================================
+- C uses the printf and scanf as its standard input and output, while Java uses the Sstem.out.print and Sysetem.in.read functions
+- in java you can handle errors by throwing an execption, while in C you can't.
+
+
+Part 1A:
+========
+HelloWorld.c: In function ‘main’:
+HelloWorld.c:5:3: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+   printf("Hello world!\n");
+   ^
+HelloWorld.c:5:3: warning: incompatible implicit declaration of built-in function ‘printf’ [enabled by default]
+
+
+Part 1B:
+========
+- the diffrence between the two outputs is when the mean is calculated, i.e the double from Java differs a bit from the double from C
+- the last decimals are not the same (Floating-point determinism)
